@@ -29,14 +29,9 @@ client.on('message', message => {
         if (message.attachments.size > 0) {
             message.attachments.forEach(async image => {
                 author = message.author.username + "#" + message.author.discriminator
-                message.channel.send({
-                    embed: {
-                        color: 7166671,
-                        description: `Success By: ${author}\nImage Link: ${image.proxyURL}`
-                    }
-                });
-                const url = image.proxyURL;
-                const options = {
+
+                let url = image.proxyURL;
+                let options = {
                     string: true,
                 };
 
@@ -50,10 +45,17 @@ client.on('message', message => {
                     var mediaIdStr = data.media_id_string
                     var params = { status: `Success By ${author}`, media_ids: [mediaIdStr] }
 
-                    twitterClient.post('statuses/update', params, function (err, data, response) {
+                    twitterClient.post('statuses/update', params, function (err, tweet, response) {
                         if (err) {
                             console.log(err)
                         }
+                        console.log(tweet.id);
+                        message.channel.send({
+                            embed: {
+                                color: 4701043,
+                                description: `Posted To Twitter :white_check_mark:`
+                            }
+                        });
                     })
 
                 })
