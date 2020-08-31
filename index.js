@@ -91,4 +91,4 @@ client.on('message', message => {
     }
 })
 
-client.login('NzQ5NjU3NDMyMTQ1MjY0NzUx.X0vK4w.JWl4YqXbrRKNrW_jyRoH1nGEbEs')
+client.login('Token')
